@@ -93,8 +93,9 @@ First cd in the root and build and deploy to your local instance:
 
 ```
 $ mvn -PautoInstallPackage -Padobe-public clean install
-
 ```
+
+If the above command errors with a message about too many unlicensed files, run it with ```-Drat.skip```
 
 Next configure two cross-origin policies on your AEM instance: 
 
@@ -110,7 +111,6 @@ Run the frontend locally.  cd into ./react-app and run the following:
 
 ```
 $ API_HOST=http://localhost:4205 npm run start
-
 ```
 
 You can navigate to `http://localhost:3000/content/${projectName}/en/home.html to see it working.
@@ -119,7 +119,6 @@ Test out the app with SSR.  In the root of ./react-app run:
 
 ```
 $ API_HOST=http://localhost:4205 APP_ROOT_PATH=/content/${projectName}/en npm run start:server
-
 ```
 
 This starts a node server that renders the app server-side.  If you inspect and create a breakpoint within the POST method you can test it is working by going to http://localhost:4502/content/${projectName}/en/home.html?wcmmode=disabled.

@@ -3,7 +3,7 @@ import { ModelClient } from '@adobe/cq-spa-page-model-manager';
 
 const FETCH_CONFIG = {
   headers: {
-    Authorization: 'Basic YWRtaW46YWRtaW4=',
+    Authorization: 'Basic ' + process.env.API_HOST,
   },
 };
 

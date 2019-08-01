@@ -10,7 +10,7 @@ const EditHead = () => (
     <meta property="cq:wcmmode" content="edit" />
     <meta
       property="cq:pagemodel_root_url"
-      content="/content/nlp/en.model.json"
+      content="/content/${projectName}/en.model.json"
     />
     <link
       rel="stylesheet"

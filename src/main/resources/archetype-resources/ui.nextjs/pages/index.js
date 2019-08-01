@@ -48,7 +48,7 @@ class AEMIndex extends React.Component {
       setRootModel(model);
       ModelManager.initialize({
         model,
-        modelClient: new CustomModelClient('http://localhost:4502'),
+        modelClient: new CustomModelClient(process.env.API_HOST),
       });
     }
   }

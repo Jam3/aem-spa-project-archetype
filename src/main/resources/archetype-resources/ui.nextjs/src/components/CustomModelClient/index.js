@@ -18,7 +18,7 @@ import { ModelClient } from '@adobe/cq-spa-page-model-manager';
 
 const FETCH_CONFIG = {
   headers: {
-    Authorization: 'Basic YWRtaW46YWRtaW4',
+    Authorization: 'Basic ' + process.env.APP_AUTHORIZATION,
   },
 };
 
@@ -38,8 +38,7 @@ export class CustomModelClient extends ModelClient {
       return Promise.reject(new Error(err));
     }
 
-    // Either the API host has been provided or we make an absolute request relative to the current host
-    let url = `${symbol_dollar}{'http://localhost:4502'}${modelPath}`;
+    let url = (process.env.API_HOST || '') + modelPath;
 
     return fetch(url, FETCH_CONFIG).then(function(response) {
       if (response.status >= 200 && response.status < 300) {

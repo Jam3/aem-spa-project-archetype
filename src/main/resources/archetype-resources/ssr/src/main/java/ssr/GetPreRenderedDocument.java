@@ -15,7 +15,6 @@
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
  package ${package}.ssr;
 
-
  import java.io.IOException;
  
  import org.jetbrains.annotations.NotNull;
@@ -56,36 +55,31 @@
                  "sling.servlet.methods=GET"
          }
  )
- @Designate( ocd = GetPreRenderedPageBody.Configuration.class )
+ @Designate( ocd = GetPreRenderedDocument.Configuration.class )
  /**
   * Service responsible for fetching Server-Side pre-rendered HTML content
   */
- public class GetPreRenderedPageBody extends SlingSafeMethodsServlet {
+ public class GetPreRenderedDocument extends SlingSafeMethodsServlet {
  
-     private static final Logger log = LoggerFactory.getLogger(GetPreRenderedPageBody.class);
+     private static final Logger log = LoggerFactory.getLogger(GetPreRenderedDocument.class);
  
-     private static final String ANGULAR_SELECTOR = "angular";
      private static final String DEFAULT_HOST_REACT = "http://localhost:4200";
-     private static final String DEFAULT_HOST_ANGULAR = "http://localhost:4000";
  
      @Reference
      private HttpClientBuilderFactory clientBuilderFactory;
  
      private String host_react;
-     private String host_angular;
- 
  
      @Activate
      protected void activate(Configuration configuration) {
          host_react = configuration.sample_spa_ssr_react_server();
-         host_angular = configuration.sample_spa_ssr_angular_server();
      }
  
      @Override
      protected void doGet(@NotNull SlingHttpServletRequest request, @NotNull SlingHttpServletResponse response) throws ServletException, IOException {
          try {
              // this should come from a config
-             final String HOST = request.getPathInfo().toLowerCase().contains(ANGULAR_SELECTOR) ? host_angular : host_react;
+             final String HOST = host_react;
              final String URL = HOST + request.getPathInfo();
  
              CloseableHttpClient client = clientBuilderFactory.newBuilder().build();
@@ -137,7 +131,6 @@
              return null;
          }
  
- 
          return  page.getRootModel();
      }
  
@@ -150,15 +143,6 @@
                  type = AttributeType.STRING
          )
          String sample_spa_ssr_react_server() default DEFAULT_HOST_REACT;
- 
-         @AttributeDefinition(
-                 name = "Angular Node Server URL",
-                 description = "full URL, i.e. " + DEFAULT_HOST_ANGULAR,
-                 type = AttributeType.STRING
-         )
-         String sample_spa_ssr_angular_server() default DEFAULT_HOST_ANGULAR;
      }
- 
- 
  }
  

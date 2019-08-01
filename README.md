@@ -19,7 +19,7 @@ Modules of the generated project is defined in [src/main/resources/archetype-res
   * AEM content package with editable templates stored at `/conf`
 * [ui.content/src/main/content/jcr_root/content](content/jcr_root/content/): 
   * AEM content package containing sample content (for development and test purposes)
-* [react-app](react-app/): The React application
+* [ui.nextjs](ui.nextjs/): The Next.js application
 * [all](all/): Combines all modules to be installed as content package in AEM
 
 ## Required parameters

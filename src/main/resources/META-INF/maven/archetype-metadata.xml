@@ -61,7 +61,7 @@
             <directory>ui.content</directory>
         </fileSet>
         <fileSet filtered="true" packaged="false">
-            <directory>react-app</directory>
+            <directory>ui.nextjs</directory>
         </fileSet>
     </fileSets>
     <requiredProperties>

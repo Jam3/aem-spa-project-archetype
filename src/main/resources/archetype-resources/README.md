@@ -12,8 +12,7 @@ This is a content package for an AEM project set up with the SPA Maven Archetype
   * AEM content package with editable templates stored at `/conf`
 * [ui.content/src/main/content/jcr_root/content](content/jcr_root/content/): 
   * AEM content package containing sample content (for development and test purposes)
-* [angular-app](angular-app/): Angular application in case frontend chosen is set to be "angular" at project generation 
-* [react-app](react-app/): React application in case frontend chosen is set to be "react" at project generation 
+* [ui.nextjs](ui.nextjs/): Next.js app that will run in a proxy server and render all the UI 
 * [all](all/): All-in-One package
 
 

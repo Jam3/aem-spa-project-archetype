@@ -35,7 +35,7 @@
     <modules>
         <module>core</module>
         <module>ssr</module>
-        <module>react-app</module>
+        <module>ui.nextjs</module>
         <module>ui.apps</module>
         <module>ui.content</module>
         <module>all</module>

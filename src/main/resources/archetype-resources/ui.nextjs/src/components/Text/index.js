@@ -13,28 +13,28 @@
  ~ See the License for the specific language governing permissions and
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- import React, {Component} from 'react';
- import {extractModelId} from '../../utils';
- import {MapTo} from '@adobe/cq-react-editable-components';
- import dynamic from 'next/dynamic'; 
-  
- /**
-  * Default Edit configuration for the Text component that interact with the Core Text component and sub-types
-  *
-  * @type EditConfig
-  */
- const TextEditConfig = {
- 
-     emptyLabel: 'Text',
- 
-     isEmpty: function(props) {
-         return !props || !props.text || props.text.trim().length < 1;
-     }
- };
- 
- const AsyncText = dynamic({
-     loader: () => import('./Text')
- })
- 
- export default MapTo('${projectName}/components/text')(AsyncText, TextEditConfig);
- 
+
+import { MapTo } from '@adobe/cq-react-editable-components';
+import dynamic from 'next/dynamic';
+
+/**
+ * Default Edit configuration for the Text component that interact with the Core Text component and sub-types
+ *
+ * @type EditConfig
+ */
+const TextEditConfig = {
+  emptyLabel: 'Text',
+
+  isEmpty: function(props) {
+    return !props || !props.text || props.text.trim().length < 1;
+  },
+};
+
+const AsyncText = dynamic({
+  loader: () => import('./Text'),
+});
+
+export default MapTo('${projectName}/components/text')(
+  AsyncText,
+  TextEditConfig
+);

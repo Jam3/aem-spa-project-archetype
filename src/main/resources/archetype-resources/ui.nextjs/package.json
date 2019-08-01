@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --inspect ssr-server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "prettier": "prettier"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +31,28 @@
   "devDependencies": {
     "ajv": "^6.10.2",
     "clone": "^2.1.2",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "babel-eslint": "9.x",
+    "eslint": "5.x",
+    "eslint-config-react-app": "^3.0.8",
+    "eslint-config-react-tools": "1.x.x",
+    "eslint-plugin-import": "2.x",
+    "eslint-plugin-jsx-a11y": "6.x",
+    "eslint-plugin-react": "7.x",
+    "husky": "^2.4.1",
+    "lint-staged": "^8.2.1",
+    "prettier": "^1.18.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
   }
 }

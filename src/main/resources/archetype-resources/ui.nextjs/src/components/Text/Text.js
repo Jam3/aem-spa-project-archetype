@@ -13,27 +13,30 @@
  ~ See the License for the specific language governing permissions and
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- import React, {Component} from 'react';
- import {extractModelId} from '../../utils';
-  
- /**
-  * Text React component
-  */
-class Text extends Component {
- 
-     get richTextContent() {
-         return <strong id={extractModelId(this.props.cqPath)} data-rte-editelement dangerouslySetInnerHTML={{__html: this.props.text}}/>;
-     }
- 
-     get textContent() {
-         return <strong>{this.props.text}</strong>;
-     }
- 
-     render() {
-         return this.props.richText ? this.richTextContent : this.textContent;
-     }
- }
+import React, { Component } from 'react';
+import { extractModelId } from '../../utils';
 
- export default Text;
- 
- 
+/**
+ * Text React component
+ */
+class Text extends Component {
+  get richTextContent() {
+    return (
+      <strong
+        id={extractModelId(this.props.cqPath)}
+        data-rte-editelement
+        dangerouslySetInnerHTML={{ __html: this.props.text }}
+      />
+    );
+  }
+
+  get textContent() {
+    return <strong>{this.props.text}</strong>;
+  }
+
+  render() {
+    return this.props.richText ? this.richTextContent : this.textContent;
+  }
+}
+
+export default Text;

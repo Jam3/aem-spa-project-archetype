@@ -13,37 +13,47 @@
  ~ See the License for the specific language governing permissions and
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- import {Page, MapTo, withComponentMappingContext, Utils } from "@adobe/cq-react-editable-components";
- import {withRoute} from '../RouteHelper';
+import {
+  Page,
+  MapTo,
+  withComponentMappingContext,
+  Utils,
+} from '@adobe/cq-react-editable-components';
+import { withRoute } from '../RouteHelper';
 
- class AppPage extends Page {
-    get childComponents() {
-        let childComponents = [];
+class AppPage extends Page {
+  get childComponents() {
+    let childComponents = [];
 
-        if (!this.props.cqItems || !this.props.cqItemsOrder) {
-            return childComponents;
-        }
-
-        this.props.cqItemsOrder.map((itemKey) => {
-            let itemProps = Utils.modelToProps(this.props.cqItems[itemKey]);
-
-            if (itemProps) {
-                let ItemComponent = this.state.componentMapping.get(itemProps.cqType);
-
-                if (ItemComponent) {
-                    childComponents.push(this.connectComponentWithItem(ItemComponent, itemProps, itemKey));
-                }
-            }
-        });
-
-        return childComponents;
+    if (!this.props.cqItems || !this.props.cqItemsOrder) {
+      return childComponents;
     }
-    
-     get containerProps() {
-         let attrs = super.containerProps;
-         attrs.className = (attrs.className || '') + ' page ' + (this.props.cssClassNames || '');
-         return attrs
-     }
- }
- 
- export default MapTo('${projectName}/components/page')(withComponentMappingContext(withRoute(AppPage)));
+
+    this.props.cqItemsOrder.map(itemKey => {
+      let itemProps = Utils.modelToProps(this.props.cqItems[itemKey]);
+
+      if (itemProps) {
+        let ItemComponent = this.state.componentMapping.get(itemProps.cqType);
+
+        if (ItemComponent) {
+          childComponents.push(
+            this.connectComponentWithItem(ItemComponent, itemProps, itemKey)
+          );
+        }
+      }
+    });
+
+    return childComponents;
+  }
+
+  get containerProps() {
+    let attrs = super.containerProps;
+    attrs.className =
+      (attrs.className || '') + ' page ' + (this.props.cssClassNames || '');
+    return attrs;
+  }
+}
+
+export default MapTo('${projectName}/components/page')(
+  withComponentMappingContext(withRoute(AppPage))
+);

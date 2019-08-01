@@ -1,4 +1,4 @@
-## Maven Archetype for AEM React SSR project
+## Maven Archetype for AEM Next.js project
 
 ## System requirements
 
@@ -89,6 +89,8 @@ Please note that properties declared in [archetype-metadata.xml](src/main/resour
 
 ### Working with the created project
 
+#### Build and deploy the project to your local AEM instance
+
 First cd in the root and build and deploy to your local instance:
 
 ```
@@ -97,29 +99,29 @@ $ mvn -PautoInstallPackage -Padobe-public clean install
 
 If the above command errors with a message about too many unlicensed files, run it with ```-Drat.skip```
 
+#### Set CORS policy on the AEM server
+
 Next configure two cross-origin policies on your AEM instance: 
 
 1. Navigate to the Configuration Manager on the AEM instance at http://localhost:4502/system/console/configMgr
 2. Look for the configuration: Adobe Granite Cross-Origin Resource Sharing Policy
 3. Create a new configuration with the following additional values:
-    * Allowed Origins: http://localhost:3000
+    * Allowed Origins: http://localhost:3001, http://localhost:4200
     * Supported Headers: Authorization
     * Allowed Methods: OPTIONS
-4. Repeat steps 1-3 on a new policy with http://localhost:4200
 
-Run the frontend locally.  cd into ./react-app and run the following:
+#### Run nginx 
 
-```
-$ API_HOST=http://localhost:4205 npm run start
-```
+Run the nginx reverse proxy.  Install nginx on your machine, i.e with `brew install nginx`. 
+Then within the root of ./ui.nextjs run `sudo nginx -c $(pwd)/nginx.conf`
 
-You can navigate to `http://localhost:3000/content/${projectName}/en/home.html to see it working.
+#### Run Next.js 
 
-Test out the app with SSR.  In the root of ./react-app run: 
+Run the Nextjs server.  cd into ./ui.nextjs and run the following:
 
 ```
-$ API_HOST=http://localhost:4205 APP_ROOT_PATH=/content/${projectName}/en npm run start:server
+$ npm run dev
 ```
 
-This starts a node server that renders the app server-side.  If you inspect and create a breakpoint within the POST method you can test it is working by going to http://localhost:4502/content/${projectName}/en/home.html?wcmmode=disabled.
-
+You can navigate to `http://localhost:3001/content/${projectName}/en/home.html to see it working.
+You can also navigate to http://localhost:3001/editor.html/content/${projectName}/en/home.html to view it in the authoring environment.

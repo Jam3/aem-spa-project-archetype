@@ -112,9 +112,9 @@ Next configure two cross-origin policies on your AEM instance:
 
 #### Set up resource mapping 
 
-Go to CXRDE Lite and navigate to /etc/map/http: http://localhost:4502/crx/de/index.jsp#/etc/map/http/
+Go to CRXDE Lite and navigate to /etc/map/http: http://localhost:4502/crx/de/index.jsp#/etc/map/http/
 
-Create a new node with the following definition: 
+Create a new node under the http folder with the following definition: 
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -124,6 +124,7 @@ Create a new node with the following definition:
     sling:internalRedirect="/bin/${projectName}/proxyservlet"
     sling:match="localhost.4502/_next/(.*)$"/>
 ```
+Save your change on the CRXDE dashboard (save all)
 
 #### Run Next.js 
 
@@ -133,5 +134,5 @@ Run the Nextjs server.  cd into ./ui.nextjs and run the following:
 $ npm run dev
 ```
 
-You can navigate to `http://localhost:3001/content/${projectName}/en/home.html to see it working.
-You can also navigate to http://localhost:3001/editor.html/content/${projectName}/en/home.html to view it in the authoring environment.
+You can navigate to `http://localhost:4502/content/${projectName}/en/home.html to see it working.
+You can also navigate to http://localhost:4502/editor.html/content/${projectName}/en/home.html to view it in the authoring environment.

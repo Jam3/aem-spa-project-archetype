@@ -106,14 +106,24 @@ Next configure two cross-origin policies on your AEM instance:
 1. Navigate to the Configuration Manager on the AEM instance at http://localhost:4502/system/console/configMgr
 2. Look for the configuration: Adobe Granite Cross-Origin Resource Sharing Policy
 3. Create a new configuration with the following additional values:
-    * Allowed Origins: http://localhost:3001, http://localhost:4200
+    * Allowed Origins: http://localhost:4200
     * Supported Headers: Authorization
     * Allowed Methods: OPTIONS
 
-#### Run nginx 
+#### Set up resource mapping 
 
-Run the nginx reverse proxy.  Install nginx on your machine, i.e with `brew install nginx`. 
-Then within the root of ./ui.nextjs run `sudo nginx -c $(pwd)/nginx.conf`
+Go to CXRDE Lite and navigate to /etc/map/http: http://localhost:4502/crx/de/index.jsp#/etc/map/http/
+
+Create a new node with the following definition: 
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" 
+    xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="sling:Mapping"
+    sling:internalRedirect="/bin/${projectName}/proxyservlet"
+    sling:match="localhost.4502/_next/(.*)$"/>
+```
 
 #### Run Next.js 
 
